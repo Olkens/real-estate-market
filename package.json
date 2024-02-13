@@ -11,7 +11,11 @@
   },
   "devDependencies": {
     "nuxt": "^3.10.0",
+    "prisma": "^5.9.1",
     "vue": "^3.4.15",
     "vue-router": "^4.2.5"
+  },
+  "dependencies": {
+    "@prisma/client": "^5.9.1"
   }
 }
