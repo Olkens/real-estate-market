@@ -11,8 +11,37 @@ datasource db {
 }
 
 model test {
-  id Int @id @default(autoincrement())
-  nazwa String @db.VarChar(100)
-  liczba Int
+  id              Int      @id @default(autoincrement())
+  nazwa           String   @db.VarChar(100)
+  liczba          Int
   data_utworzenia DateTime @default(now()) @db.Timestamp(6)
+}
+
+model person {
+  id           Int      @id @default(autoincrement())
+  name         String
+  lastname     String
+  phone_number String
+  account      account?
+  created_at   DateTime @default(now())
+  updated_at   DateTime @updatedAt
+}
+
+model account {
+  id         Int      @id @default(autoincrement())
+  person     person   @relation(fields: [person_id], references: [id])
+  person_id  Int      @unique
+  email      String   @unique
+  role       role     @relation(fields: [role_id], references: [id])
+  role_id    Int      @unique
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+}
+
+model role {
+  id         Int       @id @default(autoincrement())
+  name       String
+  account    account[]
+  created_at DateTime  @default(now())
+  updated_at DateTime  @updatedAt
 }
